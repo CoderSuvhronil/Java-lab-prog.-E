@@ -1,32 +1,39 @@
-import java.io.*;
+import java.util.Scanner;
 
-class Student1 {
+public class Student {
+    // Fields
     private String name;
     private double totalScore;
     private int numberOfQuizzes;
 
-    public Student1(String name, double score) {
+    // Constructors
+    public Student(String name, double score) {
         this.name = name;
         this.totalScore = score;
         this.numberOfQuizzes = 1;
     }
 
-    public Student1(double score, String name) {
-        this(name, score);
+    public Student(double score, String name) {
+        this.name = name;
+        this.totalScore = score;
+        this.numberOfQuizzes = 1;
     }
 
-    public Student1(String name) {
+    public Student(String name) {
         this.name = name;
         this.totalScore = 0;
         this.numberOfQuizzes = 0;
     }
 
+    // Methods
     public String getName() {
         return name;
     }
 
     public double getAverage() {
-        if (numberOfQuizzes == 0) return 0;
+        if (numberOfQuizzes == 0) {
+            return 0;
+        }
         return totalScore / numberOfQuizzes;
     }
 
@@ -43,22 +50,29 @@ class Student1 {
         System.out.println("Student Name: " + name);
         System.out.println("Average Score: " + getAverage());
     }
+}
 
-    public static void main(String[] args) throws IOException {
-        DataInputStream dis = new DataInputStream(System.in);
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
 
-        // Taking input
-        System.out.print("Enter student name: ");
-        String studentName = dis.readLine();
+// Read the student's name
+System.out.print("Enter the student's name: ");
+String studentName = scanner.nextLine();
 
-        Student1 student = new Student1(studentName);
+// Create a Student object using the name
+Student student = new Student(studentName);
 
-        for (int i = 1; i <= 3; i++) {
-            System.out.print("Enter score for quiz " + i + ": ");
-            double score = Double.parseDouble(dis.readLine());
-            student.addQuiz(score);
-        }
+// Read three quiz scores
+for (int i = 1; i <= 3; i++) {
+    System.out.print("Enter score for quiz " + i + ": ");
+    double score = scanner.nextDouble();
+    student.addQuiz(score);
+}
 
-        student.printStudent();
-    }
+ // Print the student details
+ student.printStudent();
+
+ // Close the scanner
+ scanner.close();
+}
 }
